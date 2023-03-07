@@ -1,0 +1,33 @@
+server:
+  type: simple
+  applicationContextPath: /auto-app
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+  requestLog:
+    appenders:
+    - type: console
+
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+    ski.komoro.auto: INFO
+
+  appenders:
+  - type: console
+
+database:
+  driverClass: org.sqlite.JDBC
+  user: pg-user
+  password: iAMs00perSecrEET
+  url: jdbc:sqlite:./data.db
+  properties:
+    encoding: UTF8
+  validationQuery: "/* Health Check */ SELECT 1"

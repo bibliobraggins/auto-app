@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.basepom</groupId>
+    <artifactId>basepom-minimal</artifactId>
+    <version>52</version>
+  </parent>
+
+  <groupId>ski.komoro.auto</groupId>
+  <artifactId>auto-app</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+
+  <modules>
+    <module>app</module>
+    <module>medium-tests</module>
+  </modules>
+
+  <properties>
+    <!-- basepom property overrides -->
+    <basepom.it.timeout>200</basepom.it.timeout>
+    <basepom.git-id.skip>true</basepom.git-id.skip>
+    <basepom.it.memory>1024m</basepom.it.memory>
+    <basepom.test.memory>1024m</basepom.test.memory>
+    <basepom.test.timeout>200</basepom.test.timeout>
+    <project.build.targetJdk>17</project.build.targetJdk>
+
+    <assertj-bom.version>3.24.2</assertj-bom.version>
+    <commons-logging-empty-jar.version>99.0-does-not-exist</commons-logging-empty-jar.version>
+    <dropwizard-guicey.version>5.7.0</dropwizard-guicey.version>
+    <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+    <jackson.version>2.14.2</jackson.version>
+    <junit-bom.version>5.9.2</junit-bom.version>
+    <lombok.version>1.18.26</lombok.version>
+    <maven-build-cache-extension.version>1.0.0</maven-build-cache-extension.version>
+    <sqlite-jdbc.version>3.41.0.0</sqlite-jdbc.version>
+  </properties>
+
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>${commons-logging-empty-jar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-bom.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>ru.vyarus</groupId>
+        <artifactId>dropwizard-guicey</artifactId>
+        <version>${dropwizard-guicey.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>findbugs-annotations</artifactId>
+        <version>${findbugs-annotations.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-bom</artifactId>
+        <version>${assertj-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>${sqlite-jdbc.version}</version>
+      </dependency>
+
+      <!-- Project Modules -->
+      <dependency>
+        <groupId>ski.komoro.auto</groupId>
+        <artifactId>app</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>findbugs-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.extensions</groupId>
+        <artifactId>maven-build-cache-extension</artifactId>
+        <version>${maven-build-cache-extension.version}</version>
+      </extension>
+    </extensions>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <configuration>
+            <rules>
+              <bannedDependencies>
+                <excludes>
+                  <!-- This should not exist as it will force SLF4J calls to be delegated to log4j -->
+                  <exclude>org.slf4j:slf4j-log4j12</exclude>
+                  <!-- This should not exist as it will force SLF4J calls to be delegated to jul -->
+                  <exclude>org.slf4j:slf4j-jdk14</exclude>
+                  <!-- Ensure only the slf4j binding for logback is on the classpath -->
+                  <exclude>log4j:log4j</exclude>
+                  <!-- Replaced with jakarta.activation:jakarta.activation-api -->
+                  <exclude>javax.activation:javax.activation-api</exclude>
+                  <!-- Replaced with jakarta.servlet:jakarta.servlet-api -->
+                  <exclude>javax.servlet:javax.servlet-api</exclude>
+                  <!-- Replaced with jakarta.validation:jakarta.validation-api -->
+                  <exclude>javax.validation:validation-api</exclude>
+                  <!-- Replaced with jakarta.annotation:jakarta.annotation-api -->
+                  <exclue>javax.annotation:javax.annotation-api</exclue>
+                  <!-- Replaced with jakarta.xml.bind:jakarta.xml.bind-api -->
+                  <exclude>javax.xml.bind:jaxb-api</exclude>
+                  <!-- Replaced with jakarta.ws.rs:jakarta.ws.rs-api -->
+                  <exclude>javax.ws.rs:javax.ws.rs-api</exclude>
+                  <!-- Replaced with org.glassfish:jakarta.el -->
+                  <exclude>org.glassfish:javax.el</exclude>
+                </excludes>
+              </bannedDependencies>
+            </rules>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <ignoredUnusedDeclaredDependencies>
+              <dependency>org.slf4j:jcl-over-slf4j</dependency>
+            </ignoredUnusedDeclaredDependencies>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${dep.plugin.compiler.version}</version>
+          <configuration>
+            <failOnWarning>${basepom.compiler.fail-warnings}</failOnWarning>
+            <release>${project.build.targetJdk}</release>
+            <forceJavacCompilerUse>true</forceJavacCompilerUse>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <maxmem>${basepom.build.jvmsize}</maxmem>
+            <showWarnings>true</showWarnings>
+            <compilerArgs>
+              <arg>-parameters</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
