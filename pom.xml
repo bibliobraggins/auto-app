@@ -15,7 +15,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-
   <modules>
     <module>app</module>
     <module>medium-tests</module>
@@ -23,9 +22,10 @@
 
   <properties>
     <!-- basepom property overrides -->
-    <basepom.it.timeout>200</basepom.it.timeout>
-    <basepom.git-id.skip>true</basepom.git-id.skip>
+    <!--suppress UnresolvedMavenProperty --> <!-- We actually want an environment literal here -->
+    <basepom.executable.flags>$${JAVA_OPTS}</basepom.executable.flags>
     <basepom.it.memory>1024m</basepom.it.memory>
+    <basepom.it.timeout>200</basepom.it.timeout>
     <basepom.test.memory>1024m</basepom.test.memory>
     <basepom.test.timeout>200</basepom.test.timeout>
     <project.build.targetJdk>17</project.build.targetJdk>
@@ -41,6 +41,15 @@
     <sqlite-jdbc.version>3.41.0.0</sqlite-jdbc.version>
   </properties>
 
+
+  <repositories>
+    <!-- Provides Empty Jars Like Commons Logging-->
+    <repository>
+      <id>Version99</id>
+      <name>Version 99 Does Not Exist Maven repository</name>
+      <url>https://version99.komoro.ski/mvn2</url>
+    </repository>
+  </repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -131,59 +140,13 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <configuration>
-            <rules>
-              <bannedDependencies>
-                <excludes>
-                  <!-- This should not exist as it will force SLF4J calls to be delegated to log4j -->
-                  <exclude>org.slf4j:slf4j-log4j12</exclude>
-                  <!-- This should not exist as it will force SLF4J calls to be delegated to jul -->
-                  <exclude>org.slf4j:slf4j-jdk14</exclude>
-                  <!-- Ensure only the slf4j binding for logback is on the classpath -->
-                  <exclude>log4j:log4j</exclude>
-                  <!-- Replaced with jakarta.activation:jakarta.activation-api -->
-                  <exclude>javax.activation:javax.activation-api</exclude>
-                  <!-- Replaced with jakarta.servlet:jakarta.servlet-api -->
-                  <exclude>javax.servlet:javax.servlet-api</exclude>
-                  <!-- Replaced with jakarta.validation:jakarta.validation-api -->
-                  <exclude>javax.validation:validation-api</exclude>
-                  <!-- Replaced with jakarta.annotation:jakarta.annotation-api -->
-                  <exclue>javax.annotation:javax.annotation-api</exclue>
-                  <!-- Replaced with jakarta.xml.bind:jakarta.xml.bind-api -->
-                  <exclude>javax.xml.bind:jaxb-api</exclude>
-                  <!-- Replaced with jakarta.ws.rs:jakarta.ws.rs-api -->
-                  <exclude>javax.ws.rs:javax.ws.rs-api</exclude>
-                  <!-- Replaced with org.glassfish:jakarta.el -->
-                  <exclude>org.glassfish:javax.el</exclude>
-                </excludes>
-              </bannedDependencies>
-            </rules>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <ignoredUnusedDeclaredDependencies>
+              <!-- We want these on the class path even though we don't directly use them-->
               <dependency>org.slf4j:jcl-over-slf4j</dependency>
+              <dependency>org.xerial:sqlite-jdbc</dependency>
             </ignoredUnusedDeclaredDependencies>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${dep.plugin.compiler.version}</version>
-          <configuration>
-            <failOnWarning>${basepom.compiler.fail-warnings}</failOnWarning>
-            <release>${project.build.targetJdk}</release>
-            <forceJavacCompilerUse>true</forceJavacCompilerUse>
-            <encoding>${project.build.sourceEncoding}</encoding>
-            <maxmem>${basepom.build.jvmsize}</maxmem>
-            <showWarnings>true</showWarnings>
-            <compilerArgs>
-              <arg>-parameters</arg>
-            </compilerArgs>
           </configuration>
         </plugin>
       </plugins>
