@@ -2,8 +2,8 @@ package ski.komoro.auto;
 
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.flyway.FlywayFactory;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +17,9 @@ public class AutoAppConfig extends Configuration {
     @Valid
     @NotNull
     DataSourceFactory database;
+
+    @Valid
+    @NotNull
+    FlywayFactory flyway = new FlywayFactory();
 
 }

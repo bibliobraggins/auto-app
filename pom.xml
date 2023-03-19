@@ -39,6 +39,7 @@
     <lombok.version>1.18.26</lombok.version>
     <maven-build-cache-extension.version>1.0.0</maven-build-cache-extension.version>
     <sqlite-jdbc.version>3.41.0.0</sqlite-jdbc.version>
+    <guicey-bom.version>5.7.1-1</guicey-bom.version>
   </properties>
 
 
@@ -73,9 +74,9 @@
         <type>pom</type>
       </dependency>
       <dependency>
-        <groupId>ru.vyarus</groupId>
-        <artifactId>dropwizard-guicey</artifactId>
-        <version>${dropwizard-guicey.version}</version>
+        <groupId>ru.vyarus.guicey</groupId>
+        <artifactId>guicey-bom</artifactId>
+        <version>${guicey-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
