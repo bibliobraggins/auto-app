@@ -32,14 +32,14 @@
 
     <assertj-bom.version>3.24.2</assertj-bom.version>
     <commons-logging-empty-jar.version>99.0-does-not-exist</commons-logging-empty-jar.version>
-    <dropwizard-guicey.version>5.7.0</dropwizard-guicey.version>
+    <dropwizard-flyway.version>3.0.0-1</dropwizard-flyway.version>
     <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+    <guicey-bom.version>6.0.0</guicey-bom.version>
     <jackson.version>2.14.2</jackson.version>
     <junit-bom.version>5.9.2</junit-bom.version>
     <lombok.version>1.18.26</lombok.version>
     <maven-build-cache-extension.version>1.0.0</maven-build-cache-extension.version>
     <sqlite-jdbc.version>3.41.0.0</sqlite-jdbc.version>
-    <guicey-bom.version>5.7.1-1</guicey-bom.version>
   </properties>
 
 
@@ -79,6 +79,11 @@
         <version>${guicey-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.dropwizard.modules</groupId>
+        <artifactId>dropwizard-flyway</artifactId>
+        <version>${dropwizard-flyway.version}</version>
       </dependency>
 
       <dependency>

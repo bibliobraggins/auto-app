@@ -1,6 +1,6 @@
 package ski.komoro.auto;
 
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.flyway.FlywayFactory;
 import javax.validation.Valid;
