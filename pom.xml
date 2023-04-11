@@ -43,8 +43,7 @@
   </properties>
 
 
-  <repositories>
-    <!-- Provides Empty Jars Like Commons Logging-->
+  <repositories> <!-- Provides Empty Jars Like Commons Logging-->
     <repository>
       <id>Version99</id>
       <name>Version 99 Does Not Exist Maven repository</name>
@@ -135,13 +134,14 @@
   </dependencies>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.extensions</groupId>
-        <artifactId>maven-build-cache-extension</artifactId>
-        <version>${maven-build-cache-extension.version}</version>
-      </extension>
-    </extensions>
+<!-- not predicable at this time   -->
+<!--    <extensions>-->
+<!--      <extension>-->
+<!--        <groupId>org.apache.maven.extensions</groupId>-->
+<!--        <artifactId>maven-build-cache-extension</artifactId>-->
+<!--        <version>${maven-build-cache-extension.version}</version>-->
+<!--      </extension>-->
+<!--    </extensions>-->
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
