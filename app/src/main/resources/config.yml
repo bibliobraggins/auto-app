@@ -18,8 +18,8 @@ logging:
 
 database:
   driverClass: org.sqlite.JDBC
-  user: pg-user
-  password: iAMs00perSecrEET
+  user: real
+  password: quite_real
   url: jdbc:sqlite:./data.db
   properties:
     encoding: UTF8

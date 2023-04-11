@@ -18,8 +18,8 @@ logging:
 
 database:
   driverClass: org.sqlite.JDBC
-  user: pg-user
-  password: iAMs00perSecrEET
+  user: fake
+  password: even_faker
   url: jdbc:sqlite:./medium_test.db
   properties:
     encoding: UTF8
