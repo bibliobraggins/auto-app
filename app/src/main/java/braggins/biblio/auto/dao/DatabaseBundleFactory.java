@@ -1,11 +1,11 @@
-package biblio.braggins.auto.dao;
+package braggins.biblio.auto.dao;
 
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.flyway.FlywayBundle;
 import io.dropwizard.flyway.FlywayFactory;
 import org.jdbi.v3.sqlite3.SQLitePlugin;
 import ru.vyarus.guicey.jdbi3.JdbiBundle;
-import biblio.braggins.auto.AutoAppConfig;
+import braggins.biblio.auto.AutoAppConfig;
 
 public final class DatabaseBundleFactory {
 

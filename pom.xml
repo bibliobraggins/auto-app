@@ -10,7 +10,7 @@
     <version>59</version>
   </parent>
 
-  <groupId>biblio.braggins.auto</groupId>
+  <groupId>braggins.biblio.auto</groupId>
   <artifactId>auto-app</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -124,7 +124,7 @@
 
       <!-- Project Modules -->
       <dependency>
-        <groupId>biblio.braggins.auto</groupId>
+        <groupId>braggins.biblio.auto</groupId>
         <artifactId>app</artifactId>
         <version>${project.version}</version>
       </dependency>

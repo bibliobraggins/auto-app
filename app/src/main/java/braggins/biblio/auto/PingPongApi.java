@@ -1,4 +1,4 @@
-package biblio.braggins.auto;
+package braggins.biblio.auto;
 
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
