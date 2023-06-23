@@ -12,7 +12,7 @@ public class PingPongResourceImpl implements PingPongApi {
 
     @Override
     public String ping() {
-        log.info("received ping, relying pong");
+        log.info("received ping, replying pong");
         jdbi.withHandle(h -> {
             final var execute = h.execute("select 1");
             log.info("db query response code {}", execute);
