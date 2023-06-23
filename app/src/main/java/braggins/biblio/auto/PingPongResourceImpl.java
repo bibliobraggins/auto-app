@@ -1,4 +1,4 @@
-package biblio.braggins.auto;
+package braggins.biblio.auto;
 
 import javax.inject.Inject;
 import lombok.RequiredArgsConstructor;

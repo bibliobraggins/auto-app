@@ -1,4 +1,4 @@
-package biblio.braggins.auto;
+package braggins.biblio.auto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

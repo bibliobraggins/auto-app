@@ -1,4 +1,4 @@
-package biblio.braggins.auto;
+package braggins.biblio.auto;
 
 import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;

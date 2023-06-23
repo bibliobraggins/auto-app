@@ -1,4 +1,4 @@
-package biblio.braggins.auto;
+package braggins.biblio.auto;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package biblio.braggins.auto;
+package braggins.biblio.auto;
 
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;

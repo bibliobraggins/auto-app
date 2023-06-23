@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>biblio.braggins.auto</groupId>
+        <groupId>braggins.biblio.auto</groupId>
         <artifactId>auto-app</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>biblio.braggins.auto</groupId>
+            <groupId>braggins.biblio.auto</groupId>
             <artifactId>app</artifactId>
             <scope>test</scope>
         </dependency>
