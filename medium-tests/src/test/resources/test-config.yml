@@ -12,7 +12,7 @@ server:
 logging:
   level: INFO
   loggers:
-    ski.komoro.auto: INFO
+    biblio.braggins.auto: INFO
   appenders:
   - type: console
 

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>ski.komoro.auto</groupId>
+        <groupId>biblio.braggins.auto</groupId>
         <artifactId>auto-app</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <basepom.shaded.main-class>ski.komoro.auto.AutoAppApp</basepom.shaded.main-class>
+        <basepom.shaded.main-class>biblio.braggins.auto.AutoAppApp</basepom.shaded.main-class>
     </properties>
 
     <dependencies>

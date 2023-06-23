@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 import javax.inject.Inject;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;

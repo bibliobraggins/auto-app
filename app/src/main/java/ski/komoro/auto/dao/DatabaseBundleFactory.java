@@ -1,4 +1,4 @@
-package ski.komoro.auto.dao;
+package biblio.braggins.auto.dao;
 
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.flyway.FlywayBundle;
@@ -6,7 +6,7 @@ import io.dropwizard.flyway.FlywayFactory;
 import lombok.experimental.UtilityClass;
 import org.jdbi.v3.sqlite3.SQLitePlugin;
 import ru.vyarus.guicey.jdbi3.JdbiBundle;
-import ski.komoro.auto.AutoAppConfig;
+import biblio.braggins.auto.AutoAppConfig;
 
 @UtilityClass
 public class DatabaseBundleFactory {
