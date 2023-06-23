@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;

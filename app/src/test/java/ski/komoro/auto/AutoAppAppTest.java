@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

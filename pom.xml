@@ -10,7 +10,7 @@
     <version>59</version>
   </parent>
 
-  <groupId>ski.komoro.auto</groupId>
+  <groupId>biblio.braggins.auto</groupId>
   <artifactId>auto-app</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -124,7 +124,7 @@
 
       <!-- Project Modules -->
       <dependency>
-        <groupId>ski.komoro.auto</groupId>
+        <groupId>biblio.braggins.auto</groupId>
         <artifactId>app</artifactId>
         <version>${project.version}</version>
       </dependency>

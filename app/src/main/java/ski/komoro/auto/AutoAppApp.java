@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -10,7 +10,7 @@ import io.dropwizard.core.setup.Environment;
 import io.dropwizard.jdbi3.bundles.JdbiExceptionsBundle;
 import lombok.extern.slf4j.Slf4j;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
-import ski.komoro.auto.dao.DatabaseBundleFactory;
+import biblio.braggins.auto.dao.DatabaseBundleFactory;
 
 @Slf4j
 public class AutoAppApp extends Application<AutoAppConfig> {

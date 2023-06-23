@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;

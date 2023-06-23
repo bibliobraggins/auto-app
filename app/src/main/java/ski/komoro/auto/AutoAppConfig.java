@@ -1,4 +1,4 @@
-package ski.komoro.auto;
+package biblio.braggins.auto;
 
 import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
