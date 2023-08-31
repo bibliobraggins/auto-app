@@ -1,6 +1,6 @@
 package ski.komoro.auto;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
