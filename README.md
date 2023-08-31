@@ -15,7 +15,7 @@
 ```
 - Initialize the Database File
 ```shell
-./app/target/app db init ./app/target/classes/config.yml #initialze the db
+./app/target/app db init ./app/target/classes/config.yml
 ```
 - Run the migrations (must be done any time new migration scripts are created)
 ```shell
