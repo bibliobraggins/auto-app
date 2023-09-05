@@ -142,7 +142,7 @@
 <!--        <version>${maven-build-cache-extension.version}</version>-->
 <!--      </extension>-->
 <!--    </extensions>-->
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -152,6 +152,7 @@
               <!-- We want these on the class path even though we don't directly use them-->
               <dependency>org.slf4j:jcl-over-slf4j</dependency>
               <dependency>org.xerial:sqlite-jdbc</dependency>
+              <dependency>io.dropwizard:dropwizard-http2</dependency>
             </ignoredUnusedDeclaredDependencies>
           </configuration>
         </plugin>

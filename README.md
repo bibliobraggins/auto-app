@@ -1,6 +1,9 @@
 # AutoApp
 ##### A quick dropwizard guicey demo application
- 
+
+### About
+- Supports http1.1 and http/2 connections
+
 ### Requirements
 - [JDK 17](https://adoptium.net/temurin/releases/)
   - I Prefer of OpenJDK Temurin Distribution Over The Oracle Distribution of OpenJDK
