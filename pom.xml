@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.basepom</groupId>
     <artifactId>basepom-minimal</artifactId>
-    <version>52</version>
+    <version>59</version>
   </parent>
 
   <groupId>braggins.biblio.auto</groupId>
@@ -24,22 +24,23 @@
     <!-- basepom property overrides -->
     <!--suppress UnresolvedMavenProperty --> <!-- We actually want an environment literal here -->
     <basepom.executable.flags>$${JAVA_OPTS}</basepom.executable.flags>
-    <basepom.it.memory>1024m</basepom.it.memory>
+    <basepom.it.memory>512m</basepom.it.memory>
     <basepom.it.timeout>200</basepom.it.timeout>
-    <basepom.test.memory>1024m</basepom.test.memory>
+    <basepom.test.memory>512m</basepom.test.memory>
     <basepom.test.timeout>200</basepom.test.timeout>
-    <project.build.targetJdk>17</project.build.targetJdk>
+    <basepom.check.skip-pmd>true</basepom.check.skip-pmd> <!-- Latest PMD doesn't support J21 -->
+    <project.build.targetJdk>21</project.build.targetJdk>
 
-    <assertj-bom.version>3.24.2</assertj-bom.version>
-    <commons-logging-empty-jar.version>99.0-does-not-exist</commons-logging-empty-jar.version>
-    <dropwizard-flyway.version>3.0.0-1</dropwizard-flyway.version>
+    <assertj-bom.version>3.25.3</assertj-bom.version>
+    <dropwizard-flyway.version>4.0.0-4</dropwizard-flyway.version>
+    <empty-jar.version>99.0-does-not-exist</empty-jar.version>
     <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
-    <guicey-bom.version>6.0.0</guicey-bom.version>
-    <jackson.version>2.14.2</jackson.version>
-    <junit-bom.version>5.9.2</junit-bom.version>
-    <lombok.version>1.18.26</lombok.version>
-    <maven-build-cache-extension.version>1.0.0</maven-build-cache-extension.version>
-    <sqlite-jdbc.version>3.41.0.0</sqlite-jdbc.version>
+    <guicey-bom.version>7.1.1</guicey-bom.version>
+    <jackson.version>2.16.1</jackson.version>
+    <junit-bom.version>5.10.1</junit-bom.version>
+    <junit-pioneer.version>2.2.0</junit-pioneer.version>
+    <lombok.version>1.18.30</lombok.version>
+    <sqlite-jdbc.version>3.45.1.0</sqlite-jdbc.version>
   </properties>
 
 
@@ -56,7 +57,12 @@
       <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
-        <version>${commons-logging-empty-jar.version}</version>
+        <version>${empty-jar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.activation</groupId>
+        <artifactId>jakarta.activation</artifactId> <!-- Includes duplicate classes with the api jar, Not sure if this is correct -->
+        <version>${empty-jar.version}</version>
       </dependency>
       <dependency>
         <groupId>org.junit</groupId>
@@ -106,6 +112,11 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>org.junit-pioneer</groupId>
+        <artifactId>junit-pioneer</artifactId>
+        <version>${junit-pioneer.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.xerial</groupId>
         <artifactId>sqlite-jdbc</artifactId>
         <version>${sqlite-jdbc.version}</version>
@@ -134,15 +145,7 @@
   </dependencies>
 
   <build>
-<!-- not predicable at this time   -->
-<!--    <extensions>-->
-<!--      <extension>-->
-<!--        <groupId>org.apache.maven.extensions</groupId>-->
-<!--        <artifactId>maven-build-cache-extension</artifactId>-->
-<!--        <version>${maven-build-cache-extension.version}</version>-->
-<!--      </extension>-->
-<!--    </extensions>-->
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -152,6 +155,7 @@
               <!-- We want these on the class path even though we don't directly use them-->
               <dependency>org.slf4j:jcl-over-slf4j</dependency>
               <dependency>org.xerial:sqlite-jdbc</dependency>
+              <dependency>io.dropwizard:dropwizard-http2</dependency>
             </ignoredUnusedDeclaredDependencies>
           </configuration>
         </plugin>

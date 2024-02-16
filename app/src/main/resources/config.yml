@@ -3,7 +3,7 @@ server:
   applicationContextPath: /auto-app
   adminContextPath: /admin
   connector:
-    type: http
+    type: h2c # http2 in clear text
     port: 8080
   requestLog:
     appenders:

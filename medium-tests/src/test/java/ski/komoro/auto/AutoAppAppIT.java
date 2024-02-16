@@ -1,15 +1,18 @@
 package braggins.biblio.auto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.vyarus.dropwizard.guice.test.client.DefaultTestClientFactory.USE_LOGGER;
 
 import org.glassfish.jersey.client.proxy.WebResourceFactory;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junitpioneer.jupiter.SetSystemProperty;
 import ru.vyarus.dropwizard.guice.test.ClientSupport;
 import ru.vyarus.dropwizard.guice.test.jupiter.ext.TestDropwizardAppExtension;
 
 
+@SetSystemProperty(key = USE_LOGGER, value = "true")
 class AutoAppAppIT {
 
     @RegisterExtension

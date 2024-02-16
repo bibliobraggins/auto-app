@@ -3,7 +3,7 @@ package braggins.biblio.auto;
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Clock;
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import com.google.inject.Provides;
 import ru.vyarus.dropwizard.guice.module.support.DropwizardAwareModule;
 
