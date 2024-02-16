@@ -47,5 +47,10 @@
             <artifactId>dropwizard-testing</artifactId> <!-- Version Managed by Dropwizard Guicey -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit-pioneer</groupId>
+            <artifactId>junit-pioneer</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
