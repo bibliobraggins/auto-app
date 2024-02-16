@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.basepom</groupId>
     <artifactId>basepom-minimal</artifactId>
-    <version>55</version>
+    <version>59</version>
   </parent>
 
   <groupId>ski.komoro.auto</groupId>
@@ -28,18 +28,19 @@
     <basepom.it.timeout>200</basepom.it.timeout>
     <basepom.test.memory>512m</basepom.test.memory>
     <basepom.test.timeout>200</basepom.test.timeout>
-    <project.build.targetJdk>17</project.build.targetJdk>
+    <basepom.check.skip-pmd>true</basepom.check.skip-pmd> <!-- Latest PMD doesn't support J21 -->
+    <project.build.targetJdk>21</project.build.targetJdk>
 
-    <assertj-bom.version>3.24.2</assertj-bom.version>
-    <commons-logging-empty-jar.version>99.0-does-not-exist</commons-logging-empty-jar.version>
-    <dropwizard-flyway.version>4.0.0-3</dropwizard-flyway.version>
+    <assertj-bom.version>3.25.3</assertj-bom.version>
+    <dropwizard-flyway.version>4.0.0-4</dropwizard-flyway.version>
+    <empty-jar.version>99.0-does-not-exist</empty-jar.version>
     <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
-    <guicey-bom.version>7.0.1</guicey-bom.version>
-    <jackson.version>2.15.2</jackson.version>
-    <junit-bom.version>5.10.0</junit-bom.version>
-    <lombok.version>1.18.28</lombok.version>
-    <maven-build-cache-extension.version>1.0.0</maven-build-cache-extension.version>
-    <sqlite-jdbc.version>3.43.0.0</sqlite-jdbc.version>
+    <guicey-bom.version>7.1.1</guicey-bom.version>
+    <jackson.version>2.16.1</jackson.version>
+    <junit-bom.version>5.10.1</junit-bom.version>
+    <junit-pioneer.version>2.2.0</junit-pioneer.version>
+    <lombok.version>1.18.30</lombok.version>
+    <sqlite-jdbc.version>3.45.1.0</sqlite-jdbc.version>
   </properties>
 
 
@@ -56,7 +57,12 @@
       <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
-        <version>${commons-logging-empty-jar.version}</version>
+        <version>${empty-jar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.activation</groupId>
+        <artifactId>jakarta.activation</artifactId> <!-- Includes duplicate classes with the api jar, Not sure if this is correct -->
+        <version>${empty-jar.version}</version>
       </dependency>
       <dependency>
         <groupId>org.junit</groupId>
@@ -106,6 +112,11 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>org.junit-pioneer</groupId>
+        <artifactId>junit-pioneer</artifactId>
+        <version>${junit-pioneer.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.xerial</groupId>
         <artifactId>sqlite-jdbc</artifactId>
         <version>${sqlite-jdbc.version}</version>
@@ -134,14 +145,6 @@
   </dependencies>
 
   <build>
-<!-- not predicable at this time   -->
-<!--    <extensions>-->
-<!--      <extension>-->
-<!--        <groupId>org.apache.maven.extensions</groupId>-->
-<!--        <artifactId>maven-build-cache-extension</artifactId>-->
-<!--        <version>${maven-build-cache-extension.version}</version>-->
-<!--      </extension>-->
-<!--    </extensions>-->
     <pluginManagement>
       <plugins>
         <plugin>
@@ -154,165 +157,6 @@
               <dependency>org.xerial:sqlite-jdbc</dependency>
               <dependency>io.dropwizard:dropwizard-http2</dependency>
             </ignoredUnusedDeclaredDependencies>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.basepom.maven</groupId>
-          <artifactId>duplicate-finder-maven-plugin</artifactId>
-          <configuration>
-            <exceptions>
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>annotations</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>javax.annotation</package>
-                </packages>
-              </exception>
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>annotations</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>net.jcip</groupId>
-                    <artifactId>jcip-annotations</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>net.jcip.annotations</package>
-                </packages>
-              </exception>
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>annotations</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>findbugs-annotations</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>com.github.spotbugs</groupId>
-                    <artifactId>spotbugs-annotations</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>edu.umd.cs.findbugs.annotations</package>
-                </packages>
-              </exception>
-              <!-- Java injection is a mess as well... -->
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>javax.inject</groupId>
-                    <artifactId>javax.inject</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>org.glassfish.hk2.external</groupId>
-                    <artifactId>javax.inject</artifactId>
-                  </dependency>
-                  <!-- Can contain the classes in the javax package if using version 1.x-->
-                  <dependency>
-                    <groupId>jakarta.inject</groupId>
-                    <artifactId>jakarta.inject-api</artifactId>
-                  </dependency>
-                  <!-- Can contain the classes in the javax package if using version 2.6.1-->
-                  <dependency>
-                    <groupId>org.glassfish.hk2.external</groupId>
-                    <artifactId>jakarta.inject</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>javax.inject</package>
-                </packages>
-              </exception>
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>org.glassfish.hk2.external</groupId>
-                    <artifactId>jakarta.inject</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>jakarta.inject</groupId>
-                    <artifactId>jakarta.inject-api</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>jakarta.inject</package>
-                </packages>
-              </exception>
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>com.sun.activation</groupId>
-                    <artifactId>jakarta.activation</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>jakarta.activation</groupId>
-                    <artifactId>jakarta.activation-api</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>jakarta.activation</package>
-                </packages>
-              </exception>
-              <!-- Glassfish repackages aopalliance annotations -->
-              <exception>
-                <conflictingDependencies>
-                  <dependency>
-                    <groupId>aopalliance</groupId>
-                    <artifactId>aopalliance</artifactId>
-                  </dependency>
-                  <dependency>
-                    <groupId>org.glassfish.hk2.external</groupId>
-                    <artifactId>aopalliance-repackaged</artifactId>
-                  </dependency>
-                </conflictingDependencies>
-                <packages>
-                  <package>org.aopalliance.aop</package>
-                  <package>org.aopalliance.intercept</package>
-                </packages>
-              </exception>
-            </exceptions>
-            <ignoredResourcePatterns>
-              <!-- common file endings -->
-              <ignoredResourcePattern>.*\.afm$</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.dtd$</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.gif$</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.html</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.java$</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.png$</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.properties$</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\.txt$</ignoredResourcePattern>
-              <!-- common file name patterns -->
-              <ignoredResourcePattern>^\..*</ignoredResourcePattern>
-              <ignoredResourcePattern>about.*</ignoredResourcePattern>
-              <ignoredResourcePattern>about_files\/.*</ignoredResourcePattern>
-              <ignoredResourcePattern>license\/.*</ignoredResourcePattern>
-              <ignoredResourcePattern>.*\/schema$</ignoredResourcePattern>
-              <!-- jars tend to contain these files all the time -->
-              <ignoredResourcePattern>mime\.types$</ignoredResourcePattern>
-              <ignoredResourcePattern>plugin\.properties$</ignoredResourcePattern>
-              <ignoredResourcePattern>plugin\.xml$</ignoredResourcePattern>
-              <ignoredResourcePattern>reference\.conf$</ignoredResourcePattern>
-              <!-- the logging config should not be ignored but they are a constant -->
-              <!-- source of annoyance. If you use logging properties from the classpath -->
-              <!-- then you are in trouble anyway -->
-              <ignoredResourcePattern>log4j\.xml$</ignoredResourcePattern>
-              <ignoredResourcePattern>log4j\.properties$</ignoredResourcePattern>
-              <ignoredResourcePattern>logback\.xml$</ignoredResourcePattern>
-              <ignoredResourcePattern>logback\.properties$</ignoredResourcePattern>
-            </ignoredResourcePatterns>
           </configuration>
         </plugin>
       </plugins>
