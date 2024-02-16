@@ -5,7 +5,7 @@
 - Supports http1.1 and http/2 connections
 
 ### Requirements
-- [JDK 17](https://adoptium.net/temurin/releases/)
+- [JDK 21](https://adoptium.net/temurin/releases/)
   - I Prefer of OpenJDK Temurin Distribution Over The Oracle Distribution of OpenJDK
 - A recent version of [maven](https://maven.apache.org/)
 
