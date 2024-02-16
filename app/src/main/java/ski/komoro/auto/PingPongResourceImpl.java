@@ -1,15 +1,14 @@
 package ski.komoro.auto;
 
 import jakarta.inject.Inject;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
 
 @Slf4j
-@RequiredArgsConstructor(onConstructor_ = @Inject)
 public class PingPongResourceImpl implements PingPongApi {
 
-    private final Jdbi jdbi;
+    @Inject
+    private Jdbi jdbi;
 
     @Override
     public String ping() {
